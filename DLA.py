@@ -1,11 +1,10 @@
 import random
-import numpy as np
 import pygame
 
 class Application:
     def __init__(self):
         self.size = self.width, self.height = 640, 480 # Setting size of the window
-        self.startX, self.startY = (self.width/2), (self.height/2) # Setting the starting point in the middle of the window
+        self.startX, self.startY = round(self.width/2), round(self.height/2) # Setting the starting point in the middle of the window
         self.X, self.Y = self.startX, self.startY # Initializing points
         self.displaySurface = None
         self.pixelArray = None
@@ -31,13 +30,13 @@ class Application:
         self.X += dX
         self.Y += dY # Applying the movements to the current X/Y coordinates
 
-        if self.X > 0:
+        if self.X < 0:
             self.X = 0
 
         if self.X > self.width - 1:
             self.X = self.width - 1
         
-        if self.Y > 0:
+        if self.Y < 0:
             self.Y = 0
 
         if self.Y > self.height - 1:
