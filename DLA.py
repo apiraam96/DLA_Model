@@ -15,7 +15,7 @@ class Application:
         pygame.display.set_caption("Random Walk")
         self.displaySurface = pygame.display.set_mode(self.size)
         self.pixelArray = pygame.PixelArray(self.displaySurface)
-        self.pixelColor = (0, 255, 255) #Hex code for aqua blue color
+        self.pixelColor = (0, 255, 255) # Hex code for aqua blue color
         self.isRunning = True
     
     def on_event (self, event):
@@ -33,14 +33,14 @@ class Application:
         if self.X < 0:
             self.X = 0
 
-        if self.X > self.width - 1:
-            self.X = self.width - 1
+        if self.X > self.width:
+            self.X = self.width
         
         if self.Y < 0:
             self.Y = 0
 
-        if self.Y > self.height - 1:
-            self.Y = self.height - 1
+        if self.Y > self.height:
+            self.Y = self.height
 
 
     def on_render(self):
@@ -63,6 +63,6 @@ class Application:
 
         pygame.quit()
 
-if __name__ == "__main__":
-    t = Application()
-    t.on_execute()
+
+t = Application()
+t.on_execute()
