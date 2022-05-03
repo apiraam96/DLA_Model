@@ -46,6 +46,7 @@ class Application:
     def on_render(self):
         '''Updating the pixel array'''
         self.pixelArray[self.X, self.Y] = self.pixelColor
+        print(self.pixelArray[self.X, self.Y])
 
         pygame.display.update() #Updating the display
 
