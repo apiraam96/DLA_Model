@@ -59,7 +59,7 @@ class Application:
             for event in pygame.event.get():
                 self.on_event(event)
             
-            
+            self.on_loop()
             self.on_render()
 
         pygame.quit()
