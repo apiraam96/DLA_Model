@@ -15,7 +15,7 @@ class Application:
         pygame.display.set_caption("Random Walk")
         self.displaySurface = pygame.display.set_mode(self.size)
         self.pixelArray = pygame.PixelArray(self.displaySurface)
-        self.pixelColor = (0, 255, 255) # Hex code for aqua blue color
+        self.pixelColor = (0, 0, 255) # Hex code for blue color
         self.isRunning = True
     
     def on_event (self, event):
@@ -42,7 +42,11 @@ class Application:
         if self.Y > self.height:
             self.Y = self.height
 
-
+        #Check if this pixel is already set
+        if (self.pixelArray[self.X, self.Y] == 4278190335):
+            self.pixelColor = (255, 255, 0)
+        else:
+            self.pixelColor = (0, 0, 255)
     def on_render(self):
         '''Updating the pixel array'''
         self.pixelArray[self.X, self.Y] = self.pixelColor
