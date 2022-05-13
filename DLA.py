@@ -9,6 +9,7 @@ class Application:
         self.displaySurface = None
         self.pixelArray = None
         self.pixelColor = None
+        self.updateFlag = False
     
     def on_init(self):
         pygame.init()
@@ -18,6 +19,9 @@ class Application:
         self.pixelColor = (0, 0, 255) # Hex code for blue color
         self.isRunning = True
     
+        #sest a seed point
+        self.pixelArray[self.startX, self.startY + 10] = 4278190335
+        pygame.display.update()
     def on_event (self, event):
         if event.type == pygame.QUIT:
             self.isRunning = False
@@ -27,32 +31,38 @@ class Application:
         # Choose a random direction to move
         newdirection = random.choice(((0, 1), (0, -1), (1, 0), (-1, 0))) # Moves either +/- in Xdirection or +/- in Ydirection
         dX, dY = newdirection #Extracting the movements
-        self.X += dX
-        self.Y += dY # Applying the movements to the current X/Y coordinates
+        newX = self.X + dX
+        newY = self.Y + dY # Applying the movements to the current X/Y coordinates
 
-        if self.X < 0:
-            self.X = 0
+        if newX < 0:
+            newX = 0
 
-        if self.X > self.width:
-            self.X = self.width
+        if newX > self.width:
+            newX = self.width
         
-        if self.Y < 0:
-            self.Y = 0
+        if newY < 0:
+            newY = 0
 
-        if self.Y > self.height:
-            self.Y = self.height
+        if newY > self.height:
+            newY = self.height
 
         #Check if this pixel is already set
-        if (self.pixelArray[self.X, self.Y] == 4278190335):
-            self.pixelColor = (255, 255, 0)
+        if (self.pixelArray[newX, newY] == 4278190335):
+            self.updateFlag = True
         else:
-            self.pixelColor = (0, 0, 255)
+            self.updateFlag = False
+            self.X, self.Y = newX, newY
+    
     def on_render(self):
         '''Updating the pixel array'''
-        self.pixelArray[self.X, self.Y] = self.pixelColor
         print(self.pixelArray[self.X, self.Y])
+        if self.updateFlag == True:
+            self.pixelArray[self.X, self.Y] = self.pixelColor
+            pygame.display.update() #Updating the display
 
-        pygame.display.update() #Updating the display
+            #reset the update flag and random walk
+            self.updateFlag = False
+            self.X, self.Y = self.startX, self.startY
 
 
     def on_execute(self):
