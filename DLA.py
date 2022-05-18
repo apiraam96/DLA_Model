@@ -80,7 +80,7 @@ class Application:
             self.domainMinX = max([self.minX - self.PadSize, 1])
             self.domainMaxX = min([self.maxX + self.PadSize, self.width - 1])
             self.domainMinY = max([self.minY - self.PadSize, 1])
-            self.domainMinY = min([self.minY + self.PadSize, self.height - 1])
+            self.domainMaxY = min([self.maxY + self.PadSize, self.height - 1])
             
         else:
             self.updateFlag = False
